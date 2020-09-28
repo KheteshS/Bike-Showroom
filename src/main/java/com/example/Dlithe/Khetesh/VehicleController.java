@@ -1,12 +1,15 @@
 package com.example.Dlithe.Khetesh;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -43,4 +46,41 @@ public class VehicleController {
 		temp=service.every();
 		return new ModelAndView("show").addObject("all", temp);
 	}
+	
+	@RequestMapping(value="/editable",method=RequestMethod.GET)
+	public ModelAndView editRequest(@RequestParam("id") int id) {
+		Vehicle v=service.single(id);
+		return new ModelAndView("edit").addObject("one", v);
+	}
+	
+	@RequestMapping(value="/change",method=RequestMethod.POST)
+	public ModelAndView editResponse(Vehicle vehicle) {
+		service.alter(vehicle);
+		return traverse().addObject("msg", vehicle.getModel()+" has updated");
+	}
+	
+	@RequestMapping(value="/deletable", method=RequestMethod.GET)
+	public ModelAndView deleteRequest(@RequestParam("id") int id) {
+		Vehicle temp=service.single(id);
+		String hold=service.remove(temp);
+		return traverse().addObject("msg", hold+" has deleted");
+	}
+	
+	@RequestMapping(value="/short", method=RequestMethod.GET)
+	public ModelAndView letShort() {
+		return new ModelAndView("short");
+	}
+	
+	@RequestMapping(value="/shortlist", method=RequestMethod.POST)
+	public ModelAndView shortRequest(@RequestParam("stkid") String stkid,@RequestParam("milage") String milage,@RequestParam("cc") String cc,@RequestParam("price") String price) {
+		if(stkid!="" && milage=="" && cc=="" && price=="") {
+			//Integer.parseInt(String), Long.parseLong(string)
+			Vehicle tm=service.single(Integer.parseInt(stkid));
+			temp= new ArrayList<Vehicle>();
+			temp.add(tm);
+			return new ModelAndView("show").addObject("all",temp);
+		}
+		return null;
+	}
+	
 }
