@@ -7,6 +7,21 @@
 <title>Bike Showroom</title>
 </head>
 <body>
-	<h1>Hello ${who}</h1>
+	<%response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0); %>
+	<div align="center">
+	${msg}
+	<h1>Bike Showroom Login</h1>
+	<form action="log" method="post">
+	<table>
+	<tr><td>Username:</td><td><input type="text" name="user" placeholder="Enter username"></td></tr>
+	<tr><td>Password:</td><td><input type="password" name="pass" placeholder="Enter passowrd"></td></tr>
+	<tr><td><input type="submit" value="Login"></td>
+	<td><input type="reset" value="Clear"></td></tr>
+	</table>
+	</form>
+	</div>
 </body>
 </html>

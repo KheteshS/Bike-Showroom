@@ -7,8 +7,12 @@
 <title>Vehicle List</title>
 </head>
 <body>
-${msg}
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="hai"%>
+	<%response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0); %>
+	${msg}
+	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="hai"%>
 	<table border="4" cellspacing="4" cellpadding="4" >
 		<tr>
 			<th>ID</th>
@@ -38,5 +42,7 @@ ${msg}
 			</tr>
 		</hai:forEach>
 	</table>
+	<a href="back">Back To Home</a>
+	<a href="logout">Logout</a>
 </body>
 </html>

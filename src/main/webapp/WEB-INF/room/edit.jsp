@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Edit an vehicle</title>
 </head>
 <body>
+	<%response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0); %>
 	${msg}
 	<%@ taglib prefix="dlithe" uri="http://www.springframework.org/tags/form" %>
 	<dlithe:errors path="vehicle.*"/>
@@ -26,5 +30,7 @@
 			</tr>
 		</table>
 	</form>
+	<a href="back">Back To Home</a>
+	<a href="logout">Logout</a>
 </body>
 </html>

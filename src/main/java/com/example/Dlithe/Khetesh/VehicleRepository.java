@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer>{
-	@Query("from Vehicle where milage= :milage")
+	@Query("from Vehicle where milage>= :milage")
 	public List<Vehicle> readByMilage(int milage);
 	
 	@Query("from Vehicle where cc<=:cc")
